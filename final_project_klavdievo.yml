@@ -1,0 +1,16 @@
+---
+- name: Install Docker Engine on Debian and Starting app
+  hosts: all_servers
+  become: yes
+
+  roles:
+    - role: install-docker
+
+
+- name: Deploy and Starting Jenkins on Docker Engine
+  hosts: jenkins
+  become: yes
+
+  roles:
+    - role: deploy-jenkins
+
