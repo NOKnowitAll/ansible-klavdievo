@@ -8,13 +8,12 @@
     path: /share/jenkins
 
 - name: Pull the latest official jenkins docker image
-  docker_image:
-    name: "jenkins:latest"
+  command: docker pull jenkins/jenkins:lts-jdk11
 
 - name: Create a container from the jenkins docker image
   docker_container:
     name: "jenkins-server"
-    image: "jenkins"
+    image: "jenkins/jenkins:lts-jdk11"
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -27,14 +26,14 @@
   copy: src=files/jenkins.service dest=/etc/systemd/system
 
 - name: Reload systemctl
-  shell: systemctl reload-or-restart docker-jenkins
+  shell: systemctl reload-or-restart jenkins.service
 
 - name: Enable the docker-jenkins service
-  shell: systemctl enable docker-jenkins
+  shell: systemctl enable jenkins.service
     
 - name: Run a simple command
   community.docker.docker_container_exec:
-    container: myjenkins
+    container: jenkins-server
     command: cat /var/jenkins_home/secrets/initialAdminPassword
     chdir: /root
   register: result

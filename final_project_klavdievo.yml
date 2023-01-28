@@ -1,4 +1,12 @@
 ---
+
+- name: Connection Testing
+  hosts: all
+  become: yes
+
+  roles:
+    - role: connection-testing
+
 - name: Install Docker Engine on Debian and Starting app
   hosts: all_servers
   become: yes
@@ -10,7 +18,7 @@
 - name: Deploy and Starting Jenkins on Docker Engine
   hosts: jenkins
   become: yes
-
+ 
   roles:
     - role: deploy-jenkins
 
