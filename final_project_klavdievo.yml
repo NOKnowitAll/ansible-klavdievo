@@ -1,11 +1,10 @@
 ---
-
 - name: Connection Testing
   hosts: all
   become: yes
 
   roles:
-    - role: connection-testing
+    - role: connection-test
 
 - name: Install Docker Engine on Debian and Starting app
   hosts: all_servers

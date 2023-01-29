@@ -13,7 +13,7 @@
 - name: Create a container from the jenkins docker image
   docker_container:
     name: "jenkins-server"
-    image: "jenkins/jenkins:lts-jdk11"
+    image: "{{ jenkins_ latest_image }}"
     ports:
       - "8080:8080"
       - "50000:50000"
@@ -34,7 +34,7 @@
 - name: Run a simple command
   community.docker.docker_container_exec:
     container: jenkins-server
-    command: cat /var/jenkins_home/secrets/initialAdminPassword
+    command: sudo cat /var/jenkins_home/secrets/initialAdminPassword
     chdir: /root
   register: result
 
