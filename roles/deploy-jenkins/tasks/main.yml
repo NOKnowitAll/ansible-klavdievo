@@ -8,7 +8,7 @@
     path: /share/jenkins
 
 - name: Pull the latest official jenkins docker image
-  command: docker pull "{{ jenkins_ latest_image }}"
+  command: docker pull "{{ jenkins_latest_image }}"
 
 - name: Create a container from the jenkins docker image
   docker_container:
