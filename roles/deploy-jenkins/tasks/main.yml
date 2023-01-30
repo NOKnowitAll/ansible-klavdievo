@@ -13,7 +13,7 @@
 - name: Create a container from the jenkins docker image
   docker_container:
     name: "jenkins-server"
-    image: "{{ jenkins_ latest_image }}"
+    image: "{{ jenkins_latest_image }}"
     ports:
       - "8080:8080"
       - "50000:50000"
