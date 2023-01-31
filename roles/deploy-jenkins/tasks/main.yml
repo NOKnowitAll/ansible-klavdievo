@@ -31,14 +31,13 @@
 - name: Enable the docker-jenkins service
   shell: systemctl enable jenkins.service
     
-- name: Run a simple command
-  community.docker.docker_container_exec:
-    container: jenkins-server
-    command: sudo cat /var/jenkins_home/secrets/initialAdminPassword
-    chdir: /root
+- name: Finishing installation
+  shell: |
+    echo "Jenkins will be available at http://JenkinsIP:8080"
+    echo "Use the following password for the initial setup:"
+    sudo docker exec jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword
   register: result
 
-- name: Print stdout
+- name: Showing Jenkins information
   debug:
-    var: result.stdout
-
+    msg: "{{ result.stdout_lines }}"
